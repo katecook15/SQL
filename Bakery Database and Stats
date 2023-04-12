@@ -1,0 +1,29 @@
+--Create a bakery database
+
+CREATE TABLE bakery (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, price INTEGER, ingredients INTEGER, time INTEGER);
+
+INSERT INTO bakery VALUES(1, "Carrot Cake", 1, 3.99, 21, 60);
+INSERT INTO bakery VALUES(2, "Rose Madeleines", 60, 3.50, 7, 90);
+INSERT INTO bakery VALUES(3, "Banana Bread", 2, 2.50, 5, 130);
+INSERT INTO bakery VALUES(4, "Miso Chocolate Cookies", 25, 3.99, 12, 30);
+INSERT INTO bakery VALUES(5, "Jasmine Peach Macarons", 30, 4.25, 17, 130);
+INSERT INTO bakery VALUES(6, "Lavender Scones", 10, 5.99, 6, 30);
+INSERT INTO bakery VALUES(7, "Strawberry Pavlova", 10, 6.50, 6, 130);
+INSERT INTO bakery VALUES(8, "Salted Chocolate Tart", 2, 4.50, 10, 130);
+INSERT INTO bakery VALUES(9, "Black Sesame Loaf", 1, 3.50, 11, 90);
+INSERT INTO bakery VALUES(10, "Strawberry Shortcake", 1, 5.25, 20, 130);
+INSERT INTO bakery VALUES(11, "Pistachio Crossaint", 10, 6.99, 10, 130);
+INSERT INTO bakery VALUES(12, "Canele", 20, 6.50, 5, 130);
+INSERT INTO bakery VALUES(13, "Lemon Tart", 10, 5.50, 12, 130);
+INSERT INTO bakery VALUES(14, "Blueberry Pie", 2, 3.25, 10, 130);
+INSERT INTO bakery VALUES(15, "Black Forest Cake", 1, 4.50, 20, 130);
+
+--display database
+SELECT * FROM bakery 
+ORDER BY price desc;
+
+--how many total ingredients are needed?
+SELECT SUM(ingredients) FROM bakery;
+
+--which 5 items on the menu take the longest to make? 
+SELECT name, time FROM bakery ORDER BY time desc limit 5;
