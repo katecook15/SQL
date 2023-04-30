@@ -1,16 +1,16 @@
-/*
-Winston's Donut logs
-This table of logs shows how many donuts Winston eats at each year of his life,
-plus any particular reason to explain his eating habits.
- */
+/*In this project, I referenced a pre-existing data set (Winston's Donut Logs) to issue multiple SELECT queries that utilize aggregate functions, 
+WHERE commands, AND commands, OR commands, GROUP BY COMMANDS, HAVING commands and CASE commands to return a variety of statistics and information*/
+
+/* Winston's Donut logs:
+This table of logs shows how many donuts Winston eats at each year of his life, plus any particular reason to explain his eating habits*/
  
 CREATE TABLE winstons_donut_logs (
     id TEXT PRIMARY KEY,
     status TEXT,
     years_old INTEGER,
     donuts_eaten INTEGER,
-    reason TEXT
-    );
+    reason TEXT);
+    
 INSERT INTO winstons_donut_logs VALUES (0, "new born winston lvl 0", 0, 0, "");
 INSERT INTO winstons_donut_logs VALUES (1, "baby winston lvl1", 1, 10, "(Gummed)");
 INSERT INTO winstons_donut_logs VALUES (2, "baby winston lvl2", 2, 40, "(Gummed)");
@@ -21,7 +21,7 @@ INSERT INTO winstons_donut_logs VALUES (6, "kid winston lvl1", 6, 1200, "");
 INSERT INTO winstons_donut_logs VALUES (7, "kid winston lvl2", 7, 1000, "");
 INSERT INTO winstons_donut_logs VALUES (8, "kid winston lvl3", 8, 1000, "");
 INSERT INTO winstons_donut_logs VALUES (9, "kid winston lvl4", 9, 1000, "");
-INSERT INTO winstons_donut_logs VALUES (10, "winstween lvl1", 10, 1500, "");/** tween means someone between 10 and 12 so I did winstween- tween not teen**/
+INSERT INTO winstons_donut_logs VALUES (10, "winstween lvl1", 10, 1500, "");
 INSERT INTO winstons_donut_logs VALUES (11, "winstween lvl2", 11, 500, "Braces");
 INSERT INTO winstons_donut_logs VALUES (12, "winstween lvl3", 12, 300, "Braces");
 INSERT INTO winstons_donut_logs VALUES (13, "winsteen lvl1", 13, 400, "Braces");
@@ -66,40 +66,67 @@ INSERT INTO winstons_donut_logs VALUES (51, "old-ish adult winston lvl2", 51, 25
 INSERT INTO winstons_donut_logs VALUES (52, "old-ish adult winston lvl3", 52, 2500, "");
 INSERT INTO winstons_donut_logs VALUES (53, "old-ish adult winston lvl4", 53, 1436, "Current age");
 
---using an aggregate function to output the total amount of donuts winston has eaten throughout the course of his life
+/*Issuing a SELECT query utilizing an aggregate function to return the total amount of donuts winston has eaten throughout the course of his life*/
 SELECT SUM(donuts_eaten) FROM winstons_donut_logs;
 
---using an aggregate function and a WHERE command to output the avergae amount of donuts winston ate per year during the years he had braces
-SELECT AVG(donuts_eaten) AS avg_donuts_with_braces FROM winstons_donut_logs WHERE reason = "Braces";
+/*Issuing a SELECT query utilizing an aggregate function and a WHERE command to return the avergae amount of donuts winston ate per year during the
+years he had braces*/
+SELECT AVG(donuts_eaten) AS avg_donuts_with_braces 
+ FROM winstons_donut_logs 
+ WHERE reason = "Braces";
 
---using an aggregate function and a WHERE command to output the maximum amount of donuts winston ate per year during the years he was eating healthier
-SELECT MAX(donuts_eaten) AS max_donuts_while_healthy FROM winstons_donut_logs WHERE reason = "Healthier Eating";
+/*Issuing a SELECT query utilizing an aggregate function and a WHERE command to return the maximum amount of donuts winston ate per year during the 
+years he was eating healthier*/
+SELECT MAX(donuts_eaten) AS max_donuts_while_healthy 
+ FROM winstons_donut_logs 
+ WHERE reason = "Healthier Eating";
 
---using an aggregate function and a WHERE command to ouput the minimum amount of donuts winston ate per year during the years he was on a diet 
-SELECT MIN(donuts_eaten) AS min_donuts_on_diet FROM winstons_donut_logs WHERE reason = "Diet";
+/*Issuing a SELECT query utilizing an aggregate function and a WHERE command to return the minimum amount of donuts winston ate per year during the 
+years he was on a diet*/ 
+SELECT MIN(donuts_eaten) AS min_donuts_on_diet 
+ FROM winstons_donut_logs 
+ WHERE reason = "Diet";
 
---using an aggregate function and a WHERE command to output the total amount of donuts winston ate during all of the years he was on a diet
-SELECT SUM(donuts_eaten) AS total_diet_donuts FROM winstons_donut_logs WHERE reason = "Diet";
+/*Issuing a SELECT query utilizing an aggregate function and a WHERE command to return the total amount of donuts winston ate during all of the years 
+he was on a diet*/
+SELECT SUM(donuts_eaten) AS total_diet_donuts 
+ FROM winstons_donut_logs 
+ WHERE reason = "Diet";
 
---utilizing an aggregate function, a WHERE command, and an AND command to output the average amount of donuts winston ate per year as an adult where he ate less than 1500 per year.
-SELECT ROUND(AVG(donuts_eaten)) AS "avg_adult_under_1500" FROM winstons_donut_logs WHERE years_old > 18 AND donuts_eaten < 1500;
+/*Issuing a SELECT query utilizing an aggregate function, a WHERE command, and an AND command to return the average amount of donuts winston ate per 
+year as an adult, where he ate less than 1500 per year*/
+SELECT ROUND(AVG(donuts_eaten)) AS "avg_adult_under_1500" 
+ FROM winstons_donut_logs 
+ WHERE years_old > 18 
+ AND donuts_eaten < 1500;
 
---utilizing the COUNT function to output the number of years winston ate 2500 donuts a year
-SELECT COUNT(*) AS "2500_per_year" FROM winstons_donut_logs WHERE donuts_eaten = 2500;
+/*Issuing a SELECT query utilizing the COUNT function to return the number of years winston ate 2500 donuts a year*/
+SELECT COUNT(*) AS "2500_per_year" 
+ FROM winstons_donut_logs 
+ WHERE donuts_eaten = 2500;
 
 
---utilizing a WHERE command in addition to an AND command to return the data from the years of winstons life where he was a teenager and he ate less than 2000 donuts
-SELECT * FROM winstons_donut_logs WHERE status LIKE 'winsteen%' AND donuts_eaten < 2000;
+/*Issuing a SELECT query utilizing a WHERE command in addition to an AND command to return the data from the years of winstons life where he was a 
+teenager and he ate less than 2000 donuts*/
+SELECT * FROM winstons_donut_logs 
+ WHERE status LIKE 'winsteen%' 
+ AND donuts_eaten < 2000;
 
---utilizing an OR command to output the data where the amount of donuts consumed was larger than 2000 or when winston was older than 40
-SELECT * FROM winstons_donut_logs WHERE donuts_eaten > 2000 OR years_old > 40;
+/*Issuing a SELECT query utilizing an OR command to return the data where the amount of donuts consumed was larger than 2000 or when winston was older 
+than 40*/
+SELECT * FROM winstons_donut_logs 
+ WHERE donuts_eaten > 2000 
+ OR years_old > 40;
 
---using a group by clause and a having demand to return the data from each phase (status) of winstons life where he ate less than 1500 donuts 
-SELECT status, SUM(donuts_eaten) AS total_donuts_by_age FROM winstons_donut_logs 
+/*Issuing a SELECT query utilizing a GROUP BY command and a HAVING demand to return the data from each phase (status) of winstons life where he ate less
+than 1500 donuts*/
+SELECT status, SUM(donuts_eaten) AS total_donuts_by_age 
+FROM winstons_donut_logs 
     GROUP BY status
     HAVING total_donuts_by_age < 1500;
 
---the average american eats 63 donuts per year. using the CASE command to create a query which will output the all of the years in winstons life where his total yearly donut consumption was equal to, above, or below the average
+/*The average american eats 63 donuts per year. Issuing a SELECT query utilizing the CASE command to return all of the years in winstons life where his
+total yearly donut consumption was equal to, above, or below the average*/
 SELECT COUNT(*) AS "less_than_average" FROM winstons_donut_logs WHERE donuts_eaten < 63; 
 
 SELECT COUNT(*) AS "more_than_average" FROM winstons_donut_logs WHERE donuts_eaten > 63;
@@ -112,7 +139,7 @@ SELECT status, donuts_eaten,
 END AS "avg_donut_consumption"
 FROM winstons_donut_logs;
 
---using the case command to summarize the total amount of years where winstons yearly donut consumption was equal to, above, or below the average
+/*Utilizing the CASE command to summarize the total amount of years where winstons yearly donut consumption was equal to, above, or below the average*/
 SELECT COUNT(*),
     CASE
         WHEN donuts_eaten = 63 THEN "average"
