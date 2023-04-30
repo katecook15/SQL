@@ -1,29 +1,41 @@
---Create a bakery database
+/*In this project, I created a database that contains data regarding products a bakery sells that includes information 
+about the quantity of each product this bakery makes per day, the price of each product, the total amount of ingredients 
+each product requires, and the total time it takes to produce each item. Then I issued 3 SELECT queries to order the 
+products by price (highest to lowest), return the total amount of ingredients each product requires, and return which 5 
+menu items are the most time consuming to produce.*/  
 
-CREATE TABLE bakery (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, price INTEGER, ingredients INTEGER, time INTEGER);
+CREATE TABLE bakery (
+  id INTEGER PRIMARY KEY, 
+  product_name TEXT, 
+  quantity INTEGER, 
+  price INTEGER, 
+  ingredient_amounts INTEGER, 
+  time INTEGER);
 
-INSERT INTO bakery VALUES(1, "Carrot Cake", 1, 3.99, 21, 60);
-INSERT INTO bakery VALUES(2, "Rose Madeleines", 60, 3.50, 7, 90);
-INSERT INTO bakery VALUES(3, "Banana Bread", 2, 2.50, 5, 130);
-INSERT INTO bakery VALUES(4, "Miso Chocolate Cookies", 25, 3.99, 12, 30);
-INSERT INTO bakery VALUES(5, "Jasmine Peach Macarons", 30, 4.25, 17, 130);
-INSERT INTO bakery VALUES(6, "Lavender Scones", 10, 5.99, 6, 30);
-INSERT INTO bakery VALUES(7, "Strawberry Pavlova", 10, 6.50, 6, 130);
-INSERT INTO bakery VALUES(8, "Salted Chocolate Tart", 2, 4.50, 10, 130);
-INSERT INTO bakery VALUES(9, "Black Sesame Loaf", 1, 3.50, 11, 90);
-INSERT INTO bakery VALUES(10, "Strawberry Shortcake", 1, 5.25, 20, 130);
-INSERT INTO bakery VALUES(11, "Pistachio Crossaint", 10, 6.99, 10, 130);
-INSERT INTO bakery VALUES(12, "Canele", 20, 6.50, 5, 130);
-INSERT INTO bakery VALUES(13, "Lemon Tart", 10, 5.50, 12, 130);
-INSERT INTO bakery VALUES(14, "Blueberry Pie", 2, 3.25, 10, 130);
-INSERT INTO bakery VALUES(15, "Black Forest Cake", 1, 4.50, 20, 130);
+INSERT INTO bakery VALUES (1, "Carrot Cake", 1, 3.99, 21, 60);
+INSERT INTO bakery VALUES (2, "Rose Madeleines", 60, 3.50, 7, 90);
+INSERT INTO bakery VALUES (3, "Banana Bread", 2, 2.50, 5, 130);
+INSERT INTO bakery VALUES (4, "Miso Chocolate Cookies", 25, 3.99, 12, 30);
+INSERT INTO bakery VALUES (5, "Jasmine Peach Macarons", 30, 4.25, 17, 130);
+INSERT INTO bakery VALUES (6, "Lavender Scones", 10, 5.99, 6, 30);
+INSERT INTO bakery VALUES (7, "Strawberry Pavlova", 10, 6.50, 6, 130);
+INSERT INTO bakery VALUES (8, "Salted Chocolate Tart", 2, 4.50, 10, 130);
+INSERT INTO bakery VALUES (9, "Black Sesame Loaf", 1, 3.50, 11, 90);
+INSERT INTO bakery VALUES (10, "Strawberry Shortcake", 1, 5.25, 20, 130);
+INSERT INTO bakery VALUES (11, "Pistachio Crossaint", 10, 6.99, 10, 130);
+INSERT INTO bakery VALUES (12, "Canele", 20, 6.50, 5, 130);
+INSERT INTO bakery VALUES (13, "Lemon Tart", 10, 5.50, 12, 130);
+INSERT INTO bakery VALUES (14, "Blueberry Pie", 2, 3.25, 10, 130);
+INSERT INTO bakery VALUES (15, "Black Forest Cake", 1, 4.50, 20, 130);
 
---display database
+/*Issuing a SELECT query utilizing an ORDER BY keyword to order products by price*/
 SELECT * FROM bakery 
 ORDER BY price desc;
 
---how many total ingredients are needed?
+/*Issuing a SELECT query utilizing an aggregate function to return the total amount of ingredients needed for all menu items*/
 SELECT SUM(ingredients) FROM bakery;
 
---which 5 items on the menu take the longest to make? 
-SELECT name, time FROM bakery ORDER BY time desc limit 5;
+/*Issuing a SELECT query utilizing an ORDER BY keyword to return the 5 most time consuming products to produce*/
+SELECT name, time 
+FROM bakery 
+ORDER BY time desc limit 5;
