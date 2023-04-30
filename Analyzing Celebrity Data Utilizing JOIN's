@@ -2,7 +2,7 @@
 their most famous projects, and their collaborations. Then I issued multiple queries specifically utilizing various JOIN commands
 in order to create human readable lists*/
 
-/* Create a table to store data related to famous people and their careers*/
+/*Create a table to store data related to famous people and their careers*/
 
 CREATE TABLE Famous_People (
   id INTEGER PRIMARY KEY,
@@ -112,7 +112,7 @@ SELECT FP.first_name, FP.last_name, W.net_worth
     JOIN Wealth AS W
     ON FP.id = W.celebrity_id;
     
-/* Issuing a SELECT query utilizing a LEFT OUTER JOIN to return a list of celebrities who have completed more than 15 projects*/ 
+/*Issuing a SELECT query utilizing a LEFT OUTER JOIN to return a list of celebrities who have completed more than 15 projects*/ 
 SELECT FP.first_name, FP.last_name, W.total_projects AS FP_Projects
     FROM Famous_People AS FP
     LEFT OUTER JOIN Wealth AS W
