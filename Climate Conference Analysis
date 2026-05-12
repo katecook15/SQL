@@ -176,7 +176,7 @@ FROM vips
 INNER JOIN reservations 
 ON vips.member_id = reservations.member_id 
 WHERE vips.assoc_type = 'government'
-AND welcome_rsvp = 1;
+AND reservations.dinner_rsvp = 1;
 
 --Find the number of VIPs attending each event, ordered by event attendance.
 SELECT events.event_name, COUNT(vips.member_id) AS attendee_count
