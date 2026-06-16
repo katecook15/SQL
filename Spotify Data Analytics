@@ -94,3 +94,17 @@ energy
 FROM BIT_DB.Spotifydata 
 WHERE tempo > 140
 AND energy > 0.50 ; 
+
+#8. Return the name and average popularity for every artist with an average popularity of 90 or above, and label them as "Top Star"
+WITH popularity_average_CTE AS (
+SELECT 
+s.artist_name , 
+AVG(s.popularity) AS average_popularity
+FROM Spotifydata s
+GROUP BY s.artist_name
+)
+SELECT artist_name , 
+       average_popularity,
+       'Top Star' AS tag
+FROM popularity_average_CTE  
+WHERE average_popularity >= 90;
